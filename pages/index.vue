@@ -19,6 +19,12 @@
       <!-- Power Button -->
       <button id="power"></button>
 
+      <!-- Stereo -->
+      <div id="stereo"></div>
+
+      <!-- Panel -->
+      <div id="panel"></div>
+
       <!-- Purchase Button -->
       <button id="purchase" @click="openLink('https://music.apple.com/us/album/red-light-fever/360320348')"></button>
     </div>
@@ -160,6 +166,24 @@ button#power{
   left: 360px;
   top: 169px;
   width: 35px;
+}
+
+#stereo{
+  @apply absolute rounded-full;
+  background: url(/images/stereo.png);
+  height: 13px;
+  left: 568px;
+  top: 44px;
+  width: 13px;
+}
+
+#panel{
+  @apply absolute;
+  background: #025B25;
+  height: 69px;
+  left: 453px;
+  top: 91px;
+  width: 244px;
 }
 
 button#purchase{
