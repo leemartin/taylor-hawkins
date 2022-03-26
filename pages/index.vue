@@ -91,6 +91,11 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+section{
+  @apply bg-black bg-contain bg-top bg-no-repeat;
+  background-image: url(/images/background@gray.jpg);
+}
+
 #player{
   @apply bg-green-200 relative;
   background: url(/images/player.jpg);
