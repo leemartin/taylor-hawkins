@@ -30,7 +30,7 @@
       </div>
 
       <!-- Program Button -->
-      <button id="program" @click="nextProgram"></button>
+      <button id="program" :disabled="!power" @click="nextProgram"></button>
 
       <!-- Volume Slider -->
       <div id="volume">
@@ -43,10 +43,10 @@
       </div>
 
       <!-- Pause Button -->
-      <button id="pause"></button>
+      <button id="pause" :disabled="!power"></button>
 
       <!-- Power Button -->
-      <button id="power" @click="powerOff"></button>
+      <button id="power" :disabled="!power" @click="powerOff"></button>
 
       <!-- Stereo -->
       <div id="stereo"></div>
@@ -69,6 +69,7 @@ export default {
     return {
       balance: 0,
       currentProgram: null,
+      power: false,
       volume: 1
     }
   },
