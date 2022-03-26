@@ -43,7 +43,7 @@
       <button id="pause"></button>
 
       <!-- Power Button -->
-      <button id="power"></button>
+      <button id="power" @click="powerOff"></button>
 
       <!-- Stereo -->
       <div id="stereo"></div>
@@ -86,6 +86,10 @@ export default {
       // Open url in new window
       window.open(url)
 
+    },
+    powerOff() {
+      // Alert
+      alert("Now why would you to do that?")
     }
   },
   async asyncData({ $content }) {
