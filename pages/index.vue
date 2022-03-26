@@ -8,21 +8,18 @@
     <!-- ========== -->
     
     <!-- Background -->
-    <div id="background"></div>
+    <div id="background" :class="{ 'filter grayscale': !power }"></div>
 
     <!-- Player -->
     <div id="player">
       <!-- Tip -->
-      <div id="tip"></div>
+      <!-- <div id="tip"></div> -->
 
       <!-- Tape -->
       <div id="tape"></div>
 
       <!-- Insert -->
-      <div id="insert">
-        <!-- Slot -->
-        <div id="slot"></div>
-      </div>
+      <div id="insert" :class="{ inserted:  power }"></div>
 
       <!-- Programs -->
       <div id="programs">
@@ -61,6 +58,8 @@
 </template>
 
 <script>
+import gsap from 'gsap'
+
 import Slider from '~/components/Slider'
 
 export default {
@@ -75,6 +74,83 @@ export default {
   },
   methods: {
     initializeHammer() {
+      // Get tape
+      let tape = document.getElementById('tape')
+
+      // Get insert
+      let insert = document.getElementById('insert')
+
+      // Set rest positions
+      let restX = 200
+      let restY = -36
+
+      // Start positions
+      var startX, startY
+
+      // Initialize hammer
+      let hammer = new Hammer(tape)
+
+      // Allow pan in all directions
+      hammer.get('pan').set({
+        direction: Hammer.DIRECTION_ALL
+      })
+
+      // Pan start
+      hammer.on('panstart', e => {
+        // Log
+        console.log('panstart', e)
+        
+        // Update start positions
+        startX = gsap.getProperty(tape, "x")
+        startY = gsap.getProperty(tape, "y")
+
+      })
+
+      // Pan
+      hammer.on('pan', e => {
+        // Log
+        console.log('pan', e)
+
+        // Set to new position
+        gsap.set(tape, {
+          x: startX + e.deltaX,
+          y: startY + e.deltaY
+        })
+
+      })
+
+      // Pan end
+      hammer.on('panend', e => {
+        // Log
+        console.log('panend', e)
+        
+        // Check to see if tape and drop are overlapping
+        let overlap = this.elementsOverlap(tape, insert)
+        
+        // // If overlap
+        if (overlap) {
+          // Animate into drop area
+          gsap.to(tape, {
+            x: gsap.getProperty(insert, "left") + 7,
+            y: gsap.getProperty(insert, "top") + 7
+          })
+
+          // Turn on
+          this.power = true
+          
+        } else {
+          // Animate back to start position
+          gsap.to(tape, {            
+            x: restX,
+            y: restY
+          })
+
+          // Turn off
+          this.power = false
+          
+        }
+        
+      })
 
     },
     nextProgram() {
@@ -98,7 +174,27 @@ export default {
       // Alert
       alert("Now why would you to do that?")
 
+    },
+    elementsOverlap(el1, el2) {
+      // Get rect of first element
+      const domRect1 = el1.getBoundingClientRect()
+
+      // Get rect of second element
+      const domRect2 = el2.getBoundingClientRect()
+
+      // Do they overlay?
+      return !(
+        domRect1.top > domRect2.bottom ||
+        domRect1.right < domRect2.left ||
+        domRect1.bottom < domRect2.top ||
+        domRect1.left > domRect2.right
+      )
     }
+  },
+  mounted() {
+    // Initialize Hammer
+    this.initializeHammer()
+
   },
   async asyncData({ $content }) {
     let tracks = await $content('tracks').fetch().catch(err => {
@@ -118,7 +214,8 @@ section{
 }
 
 #background{
-  @apply absolute bg-black bg-contain bg-top bg-no-repeat filter grayscale h-full left-0 top-0 w-full;
+  @apply absolute bg-black bg-contain bg-top bg-no-repeat h-full left-0 top-0 w-full;
+  @apply transition-all duration-1000;
   background-image: url(/images/background.jpg);
 }
 
@@ -139,12 +236,31 @@ section{
   width: 175px;
 }
 
+#rest{
+  @apply absolute z-10;
+  background: red;
+  height: 36px;
+  /* left: 200px; */
+  /* top: -36px; */
+  left: 50%;
+  transform: translate(-175px, -162px);
+  top: 50%;
+  width: 175px;
+}
+
 #tape{
-  @apply absolute cursor-pointer;
+  @apply absolute cursor-pointer z-20;
   background: url(/images/tape.png);
   height: 36px;
-  left: 200px;
-  top: -36px;
+  /* left: 0; */
+  /* top: 0; */
+  /* left: 200px; */
+  /* top: -36px; */
+
+  /* left: 50%; */
+  /* transform: translate(-175px, -162px); */
+  /* top: 50%; */
+  transform: translate(200px, -36px);
   width: 175px;
 }
 
