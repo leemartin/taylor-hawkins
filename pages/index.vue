@@ -1,6 +1,11 @@
 <template>
   <section>
+    <!-- ========== -->
+    <!-- Taylor Hawkins -->
+    <!-- Red Light Fever -->
     <!-- 8-Track Player -->
+    <!-- RIP -->
+    <!-- ========== -->
     <div id="player">
       <!-- Tip -->
       <div id="tip"></div>
