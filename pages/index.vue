@@ -137,6 +137,11 @@ export default {
 
           // Turn on
           this.power = true
+
+          // Disable hammer
+          // hammer.set({
+          //   enable: false
+          // })
           
         } else {
           // Animate back to start position
