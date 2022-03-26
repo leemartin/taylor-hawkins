@@ -59,7 +59,7 @@
 
 <script>
 import gsap from 'gsap'
-
+import { Howl, Howler } from 'howler'
 import Slider from '~/components/Slider'
 
 export default {
