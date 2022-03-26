@@ -90,6 +90,7 @@ export default {
     powerOff() {
       // Alert
       alert("Now why would you to do that?")
+
     }
   },
   async asyncData({ $content }) {
