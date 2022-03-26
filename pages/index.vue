@@ -46,7 +46,7 @@
       <button id="power" :disabled="!power" @click="powerOff"></button>
 
       <!-- Stereo -->
-      <div id="stereo"></div>
+      <div id="stereo" :class="{ on: power }"></div>
 
       <!-- Panel -->
       <div id="panel"></div>
@@ -235,20 +235,7 @@ section{
   @apply absolute;
   background: url(/images/tip.png);
   height: 35px;
-  left: 200px;
-  top: -77px;
-  width: 175px;
-}
-
-#rest{
-  @apply absolute z-10;
-  background: red;
-  height: 36px;
-  /* left: 200px; */
-  /* top: -36px; */
-  left: 50%;
-  transform: translate(-175px, -162px);
-  top: 50%;
+  transform: translate(200px, -77px);
   width: 175px;
 }
 
@@ -256,14 +243,6 @@ section{
   @apply absolute cursor-pointer z-20;
   background: url(/images/tape.png);
   height: 36px;
-  /* left: 0; */
-  /* top: 0; */
-  /* left: 200px; */
-  /* top: -36px; */
-
-  /* left: 50%; */
-  /* transform: translate(-175px, -162px); */
-  /* top: 50%; */
   transform: translate(200px, -36px);
   width: 175px;
 }
@@ -283,11 +262,6 @@ section{
 
 #insert.inserted{
   background-position: -100% 0%;
-}
-
-#insert #slot{
-  height: 36px;
-  width: 175px;
 }
 
 #programs{
@@ -381,6 +355,10 @@ button#power{
   left: 568px;
   top: 44px;
   width: 13px;
+}
+
+#stereo.on{
+  background-position: 100% 0;
 }
 
 #panel{
