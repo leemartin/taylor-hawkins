@@ -72,15 +72,68 @@ export default {
       volume: 1
     }
   },
+  computed: {
+    track() {
+      // Current track
+      return this.tracks[this.currentProgram]
+
+    }
+  },
   watch: {
     balance(balance) {
-      console.log('balance', balance)
+      // Adjust howler balance
+      Howler.stereo(balance)
+
+    },
+    power(power) {
+      // If power off
+      if (!power) {
+        // Stop all sounds
+        Howler.stop()
+
+        // Set program to null
+        this.currentProgram = null
+ 
+      }
+    },
+    track(newTrack, oldTrack) {
+      // If old track exists
+      if (oldTrack) {
+        // Stop it
+        oldTrack.sound.stop()
+
+      }
+
+      // If new track exists
+      if (newTrack) {
+        // Play it
+        newTrack.sound.play()
+
+      }
+      
     },
     volume(volume) {
-      console.log('volume', volume)
+      // Adjust howler volume
+      Howler.volume(volume)
+
     }
   },
   methods: {
+    initializeHowler() {
+      // Loop through tracks
+      this.tracks.forEach(track => {
+        // Create Howler sound object
+        track.sound = new Howl({
+          src: [`https://leemartin-dev.s3.amazonaws.com/clients/taylorhawkins/${track.slug}.mp3`],
+          onended: () => {
+            // Get next program
+            this.nextProgram()
+
+          }
+        })
+
+      })
+    },
     initializeHammer() {
       // Get tape
       let tape = document.getElementById('tape')
@@ -146,6 +199,9 @@ export default {
           // Turn on
           this.power = true
 
+          // Set to first program
+          this.currentProgram = 0
+
           // Disable hammer
           // hammer.set({
           //   enable: false
@@ -205,6 +261,9 @@ export default {
     }
   },
   mounted() {
+    // Initialize Howler
+    this.initializeHowler()
+
     // Initialize Hammer
     this.initializeHammer()
 
