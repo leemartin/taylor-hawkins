@@ -13,6 +13,16 @@
       <!-- Program Button -->
       <button id="program" @click="nextProgram"></button>
 
+      <!-- Volume Slider -->
+      <div id="volume">
+        <Slider v-model.number="volume"></Slider>
+      </div>
+
+      <!-- Balance Slider -->
+      <div id="balance">
+        <Slider :min="-1" :max="1" v-model.number="balance"></Slider>
+      </div>
+
       <!-- Pause Button -->
       <button id="pause"></button>
 
@@ -32,10 +42,15 @@
 </template>
 
 <script>
+import Slider from '~/components/Slider'
+
 export default {
+  components: { Slider },
   data() {
     return {
-      currentProgram: 0
+      balance: 0,
+      currentProgram: 0,
+      volume: 1
     }
   },
   methods: {
@@ -150,6 +165,18 @@ button#program{
   left: 229px;
   top: 63px;
   width: 35px;
+}
+
+#volume{
+  @apply absolute;
+  left: 294px;
+  top: 55px;
+}
+
+#balance{
+  @apply absolute;
+  left: 360px;
+  top: 55px;
 }
 
 button#pause{
