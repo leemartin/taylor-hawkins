@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       balance: 0,
-      currentProgram: 0,
+      currentProgram: null,
       volume: 1
     }
   },
