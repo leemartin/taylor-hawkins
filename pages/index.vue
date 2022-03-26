@@ -1,5 +1,5 @@
 <template>
-  <section :class="{ 'filter grayscale': !power }">
+  <section :class="{ 'off': !power }">
     <!-- ========== -->
     <!-- Taylor Hawkins -->
     <!-- Red Light Fever -->
@@ -283,6 +283,10 @@ export default {
 <style lang="postcss" scoped>
 section{
   @apply transition-all duration-1000;
+}
+
+section.off{
+  @apply filter grayscale;
 }
 
 #background{
