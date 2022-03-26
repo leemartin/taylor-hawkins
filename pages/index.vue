@@ -72,6 +72,14 @@ export default {
       volume: 1
     }
   },
+  watch: {
+    balance(balance) {
+      console.log('balance', balance)
+    },
+    volume(volume) {
+      console.log('volume', volume)
+    }
+  },
   methods: {
     initializeHammer() {
       // Get tape
