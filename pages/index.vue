@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :class="{ 'filter grayscale': !power }">
     <!-- ========== -->
     <!-- Taylor Hawkins -->
     <!-- Red Light Fever -->
@@ -8,7 +8,7 @@
     <!-- ========== -->
     
     <!-- Background -->
-    <div id="background" :class="{ 'filter grayscale': !power }"></div>
+    <div id="background"></div>
 
     <!-- Player -->
     <div id="player">
@@ -210,12 +210,11 @@ export default {
 
 <style lang="postcss" scoped>
 section{
-  
+  @apply transition-all duration-1000;
 }
 
 #background{
   @apply absolute bg-black bg-contain bg-top bg-no-repeat h-full left-0 top-0 w-full;
-  @apply transition-all duration-1000;
   background-image: url(/images/background.jpg);
 }
 
