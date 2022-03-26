@@ -128,7 +128,7 @@ section{
 }
 
 #tape{
-  @apply absolute;
+  @apply absolute cursor-pointer;
   background: url(/images/tape.png);
   height: 36px;
   left: 200px;
