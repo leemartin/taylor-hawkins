@@ -1,0 +1,11 @@
+html, body, #__nuxt, #__layout, html, body, section{
+  @apply h-full w-full;
+}
+
+body{
+  background: #397784;
+}
+
+section{
+  @apply flex items-center justify-center;
+}
