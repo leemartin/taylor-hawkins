@@ -2,6 +2,12 @@
   <section>
     <!-- 8-Track Player -->
     <div id="player">
+      <!-- Tip -->
+      <div id="tip"></div>
+
+      <!-- Tape -->
+      <div id="tape"></div>
+
       <!-- Insert Slot -->
       <div id="insert"></div>
 
@@ -91,6 +97,24 @@ export default {
   border-radius: 8px;
   height: 249px;
   width: 849px;
+}
+
+#tip{
+  @apply absolute;
+  background: url(/images/tip.png);
+  height: 35px;
+  left: 200px;
+  top: -77px;
+  width: 175px;
+}
+
+#tape{
+  @apply absolute;
+  background: url(/images/tape.png);
+  height: 36px;
+  left: 200px;
+  top: -36px;
+  width: 175px;
 }
 
 #insert{
