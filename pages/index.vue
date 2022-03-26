@@ -74,6 +74,9 @@ export default {
     }
   },
   methods: {
+    initializeHammer() {
+
+    },
     nextProgram() {
       // If we haven't arrived at last program
       if (this.currentProgram + 1 < this.tracks.length) {
