@@ -40,7 +40,7 @@
       </div>
 
       <!-- Pause Button -->
-      <button id="pause" :disabled="!power"></button>
+      <button id="pause" :disabled="!power" @click="pauseProgram"></button>
 
       <!-- Power Button -->
       <button id="power" :disabled="!power" @click="powerOff"></button>
@@ -49,7 +49,10 @@
       <div id="stereo" :class="{ on: power }"></div>
 
       <!-- Panel -->
-      <div id="panel"></div>
+      <div id="panel">
+        <!-- Waveform -->
+        <img id="waveform" :src="`/images/waveforms/${track.slug}.png`" v-if="track" />
+      </div>
 
       <!-- Purchase Button -->
       <button id="purchase" @click="openLink('https://music.apple.com/us/album/red-light-fever/360320348')"></button>
@@ -231,6 +234,18 @@ export default {
       } else {
         // Back to first program
         this.currentProgram = 0
+
+      }
+    },
+    pauseProgram() {
+      // If track is playing
+      if (this.track.sound.playing()) {
+        // Pause it
+        this.track.sound.pause()
+
+      } else {
+        // Play it
+        this.track.sound.play()
 
       }
     },
@@ -434,11 +449,15 @@ button#power{
 
 #panel{
   @apply absolute;
-  background: #025B25;
+  /* background: linear-gradient(#025B25, #19792F, #025B25); */
   height: 69px;
   left: 453px;
   top: 91px;
   width: 244px;
+}
+
+#panel img#waveform{
+  @apply block h-full w-full;
 }
 
 button#purchase{
