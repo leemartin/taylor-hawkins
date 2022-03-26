@@ -3,9 +3,5 @@ html, body, #__nuxt, #__layout, html, body, section{
 }
 
 body{
-  background: #397784;
-}
-
-section{
-  @apply flex items-center justify-center;
+  @apply bg-black;
 }

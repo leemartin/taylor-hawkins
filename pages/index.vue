@@ -6,6 +6,11 @@
     <!-- 8-Track Player -->
     <!-- RIP -->
     <!-- ========== -->
+    
+    <!-- Background -->
+    <div id="background"></div>
+
+    <!-- Player -->
     <div id="player">
       <!-- Tip -->
       <div id="tip"></div>
@@ -97,12 +102,16 @@ export default {
 
 <style lang="postcss" scoped>
 section{
-  @apply bg-black bg-contain bg-top bg-no-repeat;
-  background-image: url(/images/background@gray.jpg);
+  
+}
+
+#background{
+  @apply absolute bg-black bg-contain bg-top bg-no-repeat filter grayscale h-full left-0 top-0 w-full;
+  background-image: url(/images/background.jpg);
 }
 
 #player{
-  @apply bg-green-200 relative;
+  @apply absolute bg-green-200 left-1/2 relative transform -translate-x-1/2 -translate-y-1/2 top-1/2;
   background: url(/images/player.jpg);
   border-radius: 8px;
   height: 249px;
