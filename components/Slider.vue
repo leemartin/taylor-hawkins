@@ -36,7 +36,7 @@ input[type=range]{
   border-radius: 0;
   height: 35px;
   transform-origin: top left;
-  transform: rotateZ(90deg) translateY(-35px);
+  transform: rotateZ(-90deg) translateX(-101px);
   width: 101px;
 }
 
