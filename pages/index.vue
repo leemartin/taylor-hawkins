@@ -15,6 +15,12 @@
 
       <!-- Pause Button -->
       <button id="pause"></button>
+
+      <!-- Power Button -->
+      <button id="power"></button>
+
+      <!-- Purchase Button -->
+      <button id="purchase" @click="openLink('https://music.apple.com/us/album/red-light-fever/360320348')"></button>
     </div>
   </section>
 </template>
@@ -38,6 +44,11 @@ export default {
         this.currentProgram = 0
 
       }
+    },
+    openLink(url) {
+      // Open url in new window
+      window.open(url)
+
     }
   },
   async asyncData({ $content }) {
@@ -133,5 +144,29 @@ button#program{
   left: 229px;
   top: 63px;
   width: 35px;
+}
+
+button#pause{
+  @apply absolute;
+  height: 25px;
+  left: 294px;
+  top: 169px;
+  width: 35px;
+}
+
+button#power{
+  @apply absolute;
+  height: 25px;
+  left: 360px;
+  top: 169px;
+  width: 35px;
+}
+
+button#purchase{
+  @apply absolute rounded-full;
+  height: 56px;
+  left: 746px;
+  top: 86px;
+  width: 56px;
 }
 </style>
