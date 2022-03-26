@@ -18,8 +18,11 @@
       <!-- Tape -->
       <div id="tape"></div>
 
-      <!-- Insert Slot -->
-      <div id="insert"></div>
+      <!-- Insert -->
+      <div id="insert">
+        <!-- Slot -->
+        <div id="slot"></div>
+      </div>
 
       <!-- Programs -->
       <div id="programs">
@@ -142,8 +145,7 @@ section{
 }
 
 #insert{
-  @apply absolute;
-  background: red;
+  @apply absolute flex items-center justify-center;
   background: url(/images/slot.jpg);
   height: 50px;
   left: 75px;
@@ -157,6 +159,11 @@ section{
 
 #insert.inserted{
   background-position: -100% 0%;
+}
+
+#insert #slot{
+  height: 36px;
+  width: 175px;
 }
 
 #programs{
