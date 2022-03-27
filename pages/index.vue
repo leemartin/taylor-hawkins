@@ -340,7 +340,7 @@ section{
 }
 
 section.off{
-  @apply filter grayscale;
+  filter: grayscale(100%);
 }
 
 #background{
