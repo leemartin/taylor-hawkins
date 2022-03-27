@@ -95,9 +95,16 @@ export default {
         // Stop all sounds
         Howler.stop()
 
+        // Play eject sound
+        this.ejectSound.play()
+
         // Set program to null
         this.currentProgram = null
  
+      } else {
+        // Play insert sound
+        this.insertSound.play()
+
       }
     },
     track(newTrack, oldTrack) {
@@ -124,6 +131,21 @@ export default {
   },
   methods: {
     initializeHowler() {
+      // Create insert sound
+      this.insertSound = new Howl({
+        src: ['/sounds/insert.mp3']
+      })
+
+      // Create eject sound
+      this.ejectSound = new Howl({
+        src: ['/sounds/eject.mp3']
+      })
+
+      // Create program sound
+      this.programSound = new Howl({
+        src: ['/sounds/program.mp3']
+      })
+
       // Loop through tracks
       this.tracks.forEach(track => {
         // Create Howler sound object
@@ -193,6 +215,13 @@ export default {
         // Log
         // console.log('pan', e)
 
+        // If power is on
+        if (this.power) {
+          // Turn it off
+          this.power = false
+
+        }
+
         // Set to new position
         gsap.set(tape, {
           x: startX + e.deltaX,
@@ -244,6 +273,9 @@ export default {
 
     },
     nextProgram() {
+      // Play program sound
+      this.programSound.play()
+
       // If we haven't arrived at last program
       if (this.currentProgram + 1 < this.tracks.length) {
         // Increment program
