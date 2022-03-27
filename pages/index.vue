@@ -50,8 +50,8 @@
 
       <!-- Panel -->
       <div id="panel">
-        <!-- Waveform -->
-        <img id="waveform" :src="`/images/waveforms/${track.slug}.png`" v-if="track" />
+        <!-- Progress -->
+        <div id="progress" :style="{ left: `${progress * 100}%` }"></div>
       </div>
 
       <!-- Purchase Button -->
@@ -72,6 +72,7 @@ export default {
       balance: 0,
       currentProgram: null,
       power: false,
+      progress: 0,
       volume: 1
     }
   },
@@ -128,13 +129,30 @@ export default {
         // Create Howler sound object
         track.sound = new Howl({
           src: [`https://leemartin-dev.s3.amazonaws.com/clients/taylorhawkins/${track.slug}.mp3`],
-          onended: () => {
+          onplay: () => {
+            // Start render
+            this.startRender()
+
+          },
+          onpause: () => {
+            // Stop render
+            this.stopRender()
+
+          },
+          onstop: () => {
+            // Stop render
+            this.stopRender()
+
+          },
+          onend: () => {
+            // Stop render
+            this.stopRender()
+
             // Get next program
             this.nextProgram()
 
           }
         })
-
       })
     },
     initializeHammer() {
@@ -162,7 +180,7 @@ export default {
       // Pan start
       hammer.on('panstart', e => {
         // Log
-        console.log('panstart', e)
+        // console.log('panstart', e)
         
         // Update start positions
         startX = gsap.getProperty(tape, "x")
@@ -173,7 +191,7 @@ export default {
       // Pan
       hammer.on('pan', e => {
         // Log
-        console.log('pan', e)
+        // console.log('pan', e)
 
         // Set to new position
         gsap.set(tape, {
@@ -186,7 +204,7 @@ export default {
       // Pan end
       hammer.on('panend', e => {
         // Log
-        console.log('panend', e)
+        // console.log('panend', e)
         
         // Check to see if tape and drop are overlapping
         let overlap = this.elementsOverlap(tape, insert)
@@ -257,6 +275,27 @@ export default {
     powerOff() {
       // Alert
       alert("Now why would you to do that?")
+
+    },
+    render() {
+      // If track exists
+      if (this.track) {
+        // Calculate progress
+        this.progress = this.track.sound.seek() / this.track.sound.duration()
+      }
+
+      // Request animation
+      this.frame = requestAnimationFrame(this.render)
+
+    },
+    startRender() {
+      // Request animation
+      this.frame = requestAnimationFrame(this.render)
+
+    },
+    stopRender() {
+      // Cancel animation
+      cancelAnimationFrame(this.frame)
 
     },
     elementsOverlap(el1, el2) {
@@ -449,15 +488,16 @@ button#power{
 
 #panel{
   @apply absolute;
-  /* background: linear-gradient(#025B25, #19792F, #025B25); */
   height: 69px;
   left: 453px;
   top: 91px;
   width: 244px;
 }
 
-#panel img#waveform{
-  @apply block h-full w-full;
+#panel #progress{
+  @apply absolute bg-white h-1/2 top-1/4 w-px;
+  background: #c0c0c0;
+  /* height: 69px; */
 }
 
 button#purchase{
