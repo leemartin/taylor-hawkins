@@ -215,6 +215,20 @@ export default {
         // Log
         // console.log('pan', e)
 
+        // Check to see if tape and drop are overlapping
+        let overlap = this.elementsOverlap(tape, insert)
+
+        // If overlap
+        if (overlap) {
+          // Use overlap class
+          insert.classList.add("overlap")
+
+        } else {
+          // Remove overlap class
+          insert.classList.remove("overlap")
+
+        }
+
         // If power is on
         if (this.power) {
           // Turn it off
@@ -238,7 +252,7 @@ export default {
         // Check to see if tape and drop are overlapping
         let overlap = this.elementsOverlap(tape, insert)
         
-        // // If overlap
+        // If overlap
         if (overlap) {
           // Animate into drop area
           gsap.to(tape, {
