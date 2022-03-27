@@ -11,19 +11,19 @@ export default {
         // content: 'width=device-width, initial-scale=1'
       }, {
         property: 'og:site_name',
-        content: ""
+        content: "Taylor Hawkins"
       }, {
         property: 'og:image',
-        content: ""
+        content: "https://www.taylorhawkins.rip/images/social.jpg"
       }, {
         property: 'og:title',
-        content: ""
+        content: "Taylor Hawkins"
       }, {
         property: 'og:description',
-        content: ""
+        content: "1972 - 2022"
       }, {
         property: 'og:url',
-        content: ""
+        content: "https://www.taylorhawkins.rip"
       }, {
         property: 'og:type',
         content: "website"
@@ -35,16 +35,16 @@ export default {
         content: "taylorhawkins"
       }, {
         name: 'twitter:title',
-        content: ""
+        content: "Taylor Hawkins"
       }, {
         name: 'twitter:description',
-        content: ""
+        content: "1972 - 2022"
       }, {
         name: 'twitter:image',
-        content: ""
+        content: "https://www.taylorhawkins.rip/images/social.jpg"
       }, {
         name: 'twitter:url',
-        content: ""
+        content: "https://www.taylorhawkins.rip"
       }
     ],
     script: [
