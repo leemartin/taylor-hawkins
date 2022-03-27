@@ -2,13 +2,17 @@ export default {
   buildModules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/app.css'],
   head: {
-    title: 'Taylor Hawkins',
+    title: 'Taylor Hawkins: 1972 - 2022',
+    link: [
+      {
+        href: '/favicon.png',
+        rel: 'icon',
+        type: 'image/png'
+      }
+    ],
     meta: [
       {
         charset: 'utf-8'
-      }, {
-        // name: 'viewport',
-        // content: 'width=device-width, initial-scale=1'
       }, {
         property: 'og:site_name',
         content: "Taylor Hawkins"
